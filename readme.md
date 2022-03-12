@@ -1,2 +1,7 @@
-## Run
-`docker compose up api web`
+## Temporary
+
+- api: `npm run dev:server`
+- web: `npm run start`
+
+still working on docker
+

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { read, create, update } from '..'
+import { read, create, update } from 'endpoints/user'
 
 const userRouter = Router();
 
