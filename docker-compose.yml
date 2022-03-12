@@ -1,0 +1,21 @@
+version: '2'
+services:
+  api:
+    build: api
+    working_dir: /api/
+    command: "npm run start"
+    ports:
+      - '3030:3030'
+    depends_on:
+      - mongo
+  web:
+    build: web
+    working_dir: /web/
+    command: "npm run start"
+    ports:
+      - '3000:3000'
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'
+
