@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import passport from 'passport'
 import session from 'express-session'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 
 import AuthRouter from 'endpoints/auth/express'
 import UserRouter from 'endpoints/user/express'
@@ -17,6 +18,7 @@ mongoose.connect('mongodb://localhost:27017/auctionmadness');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors())
 
 app.use(session({ secret: 'djakldjaskldjaskdal', maxAge: null })); //session secret
 app.use(passport.initialize());
