@@ -15,14 +15,14 @@ import PassportStrategy from 'middleware/auth/passport'
 const app = express();
 const port = 3030;
 
-mongoose.connect('mongodb://localhost:27017/auctionmadness');
+mongoose.connect('mongodb+srv://james:wYRsm3eeHhenzJm7@cluster0.tucj3.mongodb.net/AuctionMadness?retryWrites=true&w=majority');
 
 app.use(morgan(':method :status :url :response-time'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 
-app.use(session({ secret: 'djakldjaskldjaskdal', maxAge: null })); //session secret
+app.use(session({ secret: 'cn0nfwwklfmwdk', maxAge: null })); //session secret
 app.use(passport.initialize());
 app.use(passport.session());
 PassportStrategy(passport);
