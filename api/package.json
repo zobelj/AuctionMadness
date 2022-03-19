@@ -3,9 +3,11 @@
     "dev:server": "nodemon --watch './**/*' -e ts,js,css --exec 'ts-node -r tsconfig-paths/register' src/app.ts"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "mongoose": "^6.2.6",
+    "passport": "^0.5.2",
     "passport-local": "^1.0.0",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.2"
