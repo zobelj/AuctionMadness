@@ -7,7 +7,10 @@ import {
     SIGNUP_REQUEST_FAILURE,
     INFO_REQUEST_SENT,
     INFO_REQUEST_SUCCESS,
-    INFO_REQUEST_FAILURE
+    INFO_REQUEST_FAILURE,
+    LOGOUT_REQUEST_SENT,
+    LOGOUT_REQUEST_SUCCESS,
+    LOGOUT_REQUEST_FAILURE
 } from '.'
 
 const DEFAULT_STATE = Object.freeze({
@@ -48,6 +51,12 @@ const AuthReducer = (state = DEFAULT_STATE, action) => {
                 user: action.payload
             };
         case INFO_REQUEST_FAILURE:
+            return DEFAULT_STATE;
+        case LOGOUT_REQUEST_SENT:
+            return state;
+        case LOGOUT_REQUEST_SUCCESS:
+            return DEFAULT_STATE;
+        case LOGOUT_REQUEST_FAILURE:
             return DEFAULT_STATE;
         default:
             return state;

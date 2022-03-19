@@ -10,6 +10,10 @@ export const INFO_REQUEST_SENT = 'INFO_REQUEST_SENT';
 export const INFO_REQUEST_SUCCESS = 'INFO_REQUEST_SUCCESS';
 export const INFO_REQUEST_FAILURE = 'INFO_REQUEST_FAILURE';
 
+export const LOGOUT_REQUEST_SENT = 'LOGOUT_REQUEST_SENT';
+export const LOGOUT_REQUEST_SUCCESS = 'LOGOUT_REQUEST_SUCCESS';
+export const LOGOUT_REQUEST_FAILURE = 'LOGOUT_REQUEST_FAILURE';
+
 import * as AuthActions from './actions';
 
 export default AuthActions;

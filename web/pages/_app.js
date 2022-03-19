@@ -8,7 +8,8 @@ import AuthActions from '../store/auth';
 
 function MyApp({ Component, pageProps }) {
 	useEffect(() => {
-		store.dispatch(AuthActions.getUser());
+		const path = location.pathname;
+		if (path !== '/logout') store.dispatch(AuthActions.getUser());
 	}, []);
 
 	return (

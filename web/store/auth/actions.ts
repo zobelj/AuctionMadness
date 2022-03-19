@@ -7,7 +7,10 @@ import {
     SIGNUP_REQUEST_FAILURE,
     INFO_REQUEST_SENT,
     INFO_REQUEST_SUCCESS,
-    INFO_REQUEST_FAILURE
+    INFO_REQUEST_FAILURE,
+    LOGOUT_REQUEST_SENT,
+    LOGOUT_REQUEST_SUCCESS,
+    LOGOUT_REQUEST_FAILURE
 } from '.';
 
 export const login = ({ email, password }) => {
@@ -68,3 +71,22 @@ export const getUser = () => {
             .catch((err) => dispatch({ type: INFO_REQUEST_FAILURE, payload: { error: true } }));
     };
 };
+
+export const logout = () => {
+    return (dispatch) => {
+        dispatch({ type: LOGOUT_REQUEST_SENT });
+        fetch('/api/auth/logout', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                if (res.message === 'success') dispatch({ type: LOGOUT_REQUEST_SUCCESS });
+                else dispatch({ type: LOGOUT_REQUEST_FAILURE, payload: { error: true } });
+            })
+            .catch((err) => dispatch({ type: LOGOUT_REQUEST_FAILURE, payload: { error: true } }));
+    };
+}

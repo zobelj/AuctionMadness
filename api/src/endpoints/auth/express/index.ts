@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { info, login } from 'endpoints/auth'
+import { info, login, logout } from 'endpoints/auth'
 import passport from 'passport'
 
 
@@ -19,5 +19,7 @@ AuthRouter.get('/user',
     },
     info
 )
+
+AuthRouter.post('/logout', logout);
 
 export default AuthRouter;
