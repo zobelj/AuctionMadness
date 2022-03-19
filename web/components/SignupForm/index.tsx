@@ -1,24 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Wrapper } from './styled'
 import { TextField, Button } from '@mui/material'
-const SignupForm = () => {
+import { useRouter } from 'next/router'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import AuthActions from '../../store/auth'
+
+const SignupForm = ({ signup, signupSuccess, signupFailure }) => {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
+    const [error, setError] = useState(false)
+    const [invalidEmail, setInvalidEmail] = useState(undefined);
+
+    const router = useRouter();
 
     const submit = () => {
-        fetch('/api/auth/signup', {
-            method: "POST",
-            body: JSON.stringify({ name, email, password }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-        }).then(res => res.json())
-            .then(res => console.log(res))
+        signup({ name, email, password })
+        setInvalidEmail(email)
     }
+
+    useEffect(() => {
+        if (signupSuccess) {
+            router.push('/');
+        }
+        setError(signupFailure && invalidEmail === email);
+    }, [email, password, invalidEmail, signupSuccess, signupFailure]); // only rerender when these values change
+
 
     return (
         <Wrapper>
@@ -39,10 +48,13 @@ const SignupForm = () => {
                 type="password"
                 onChange={e => setPassword(e.target.value)}
             />
-            <Button variant="outlined" onClick={submit}>Login</Button>
+            { error ? (<Button variant="outlined" color="error">Account Already Exists!</Button>) : (<Button variant="outlined" onClick={submit}>Signup</Button>)}
         </Wrapper>
     )
 }
 
 
-export default SignupForm;
+const mapStateToProps = (state) => ({ signupSuccess: state.auth.user, signupFailure: state.auth.error })
+const mapDispatchToProps = (dispatch) => bindActionCreators({ signup: AuthActions.signup }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupForm)

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { login, signup } from 'endpoints/auth'
+import { info, login } from 'endpoints/auth'
 import passport from 'passport'
 
 
@@ -10,6 +10,14 @@ AuthRouter.post('/login',
     login
 )
 
-AuthRouter.post('/signup', signup)
+AuthRouter.get('/user',
+    (req, res, next) => {
+        // @ts-ignore
+        if (req.user)
+            return next();
+        return res.status(401).json({ message: "unauthorized" })
+    },
+    info
+)
 
 export default AuthRouter;

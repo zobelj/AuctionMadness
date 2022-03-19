@@ -4,7 +4,10 @@ import {
     LOGIN_REQUEST_FAILURE,
     SIGNUP_REQUEST_SENT,
     SIGNUP_REQUEST_SUCCESS,
-    SIGNUP_REQUEST_FAILURE
+    SIGNUP_REQUEST_FAILURE,
+    INFO_REQUEST_SENT,
+    INFO_REQUEST_SUCCESS,
+    INFO_REQUEST_FAILURE
 } from '.';
 
 export const login = ({ email, password }) => {
@@ -27,12 +30,12 @@ export const login = ({ email, password }) => {
     };
 };
 
-export const signup = ({ email, password }) => {
+export const signup = ({ name, email, password }) => {
     return (dispatch) => {
         dispatch({ type: SIGNUP_REQUEST_SENT });
-        fetch('/api/auth/signup', {
+        fetch('/api/user/create', {
             method: 'POST',
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ name, email, password }),
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
@@ -44,5 +47,24 @@ export const signup = ({ email, password }) => {
                 else dispatch({ type: SIGNUP_REQUEST_FAILURE, payload: { error: true } });
             })
             .catch((err) => dispatch({ type: SIGNUP_REQUEST_FAILURE, payload: { error: true } }));
+    };
+};
+
+export const getUser = () => {
+    return (dispatch) => {
+        dispatch({ type: INFO_REQUEST_SENT });
+        fetch('/api/auth/user', {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                if (res.user) dispatch({ type: INFO_REQUEST_SUCCESS, payload: res.user });
+                else dispatch({ type: INFO_REQUEST_FAILURE, payload: { error: true } });
+            })
+            .catch((err) => dispatch({ type: INFO_REQUEST_FAILURE, payload: { error: true } }));
     };
 };

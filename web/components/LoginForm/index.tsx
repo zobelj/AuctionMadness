@@ -41,7 +41,7 @@ const LoginForm = ({ login, loginSuccess, loginFailure }) => {
                 type="password"
                 onChange={e => setPassword(e.target.value)}
             />
-            { error ? (<Button variant="outlined" color="error">Invalid Account</Button>) : (<Button variant="outlined" onClick={submit}>Login</Button>)}
+            { error ? (<Button variant="outlined" color="error">Cannot Find User</Button>) : (<Button variant="outlined" onClick={submit}>Login</Button>)}
         </Wrapper>
     )
 }
