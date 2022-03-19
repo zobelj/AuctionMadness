@@ -12,9 +12,7 @@ import {
     Tooltip,
     MenuItem
   } from '@mui/material';
-  
-import MenuIcon from '@mui/icons-material/Menu';
-  
+    
 const userPages = ['Home', 'About', 'Contact']
 const settings = ['Profile', 'Account', 'Logout'];
   
@@ -59,7 +57,6 @@ const Navbar = () => {
                 onClick={handleOpenNavMenu}
                 color="inherit"
               >
-                <MenuIcon />
               </IconButton>
               <Menu
                 id="menu-appbar"

@@ -5,13 +5,13 @@ width: 400px;
 height: 400px;
 display: flex;
 flex-direction: column;
-justify-content: space-around;
+justify-content: center;
 
 border: medium solid black;
 
 position: absolute;
 left: 50%;
 transform: translate(-50%, 0);
-margin-top: 200px;
+margin-top: 20px;
 padding: 50px;
 `;

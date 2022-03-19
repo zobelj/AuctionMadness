@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Wrapper } from './styled'
-import { TextField, Button } from '@mui/material'
+import { TextField, Button, Card } from '@mui/material'
 const LoginForm = () => {
 
     const [email, setEmail] = useState('')
@@ -20,19 +20,27 @@ const LoginForm = () => {
 
     return (
         <Wrapper>
-            <h1>Login</h1>
-            <TextField
-                id="outlined-name"
-                label="Email"
-                onChange={e => setEmail(e.target.value)}
-            />
-            <TextField
-                id="outlined-uncontrolled"
-                label="Password"
-                type="password"
-                onChange={e => setPassword(e.target.value)}
-            />
-            <Button variant="outlined" onClick={submit}>Login</Button>
+            
+                <h1>Login</h1>
+                <TextField
+                    id="outlined-name"
+                    label="Email"
+                    onChange={e => setEmail(e.target.value)}
+                    style={{ marginTop: '10px' }}
+                />
+                <TextField
+                    id="outlined-uncontrolled"
+                    label="Password"
+                    type="password"
+                    onChange={e => setPassword(e.target.value)}
+                    style={{ marginTop: '10px' }}
+                />
+                <Button
+                    variant="outlined"
+                    onClick={submit}
+                    style={{ marginTop: '10px' }}
+                >Login</Button>
+            
         </Wrapper>
     )
 }
