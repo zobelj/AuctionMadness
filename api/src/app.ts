@@ -15,7 +15,7 @@ import PassportStrategy from 'middleware/auth/passport'
 const app = express();
 const port = 3030;
 
-mongoose.connect('mongodb+srv://james:wYRsm3eeHhenzJm7@cluster0.tucj3.mongodb.net/Cluster0?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://james:wYRsm3eeHhenzJm7@cluster0.tucj3.mongodb.net/AuctionMadness?retryWrites=true&w=majority');
 
 app.use(morgan(':method :status :url :response-time'))
 app.use(bodyParser.json());
