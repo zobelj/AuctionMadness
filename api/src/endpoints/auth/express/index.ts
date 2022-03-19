@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { login, register } from 'endpoints/auth'
+import { login, signup } from 'endpoints/auth'
 import passport from 'passport'
 
 
@@ -10,6 +10,6 @@ AuthRouter.post('/login',
     login
 )
 
-AuthRouter.post('/register', register)
+AuthRouter.post('/signup', signup)
 
 export default AuthRouter;
