@@ -8,14 +8,15 @@ const LoginForm = () => {
     const [error, setError] = useState('')
 
     const submit = () => {
-        console.log(email, password)
-        fetch('http://localhost:3030/auth/login', {
-            method: "POST", body: JSON.stringify({ email, password }), headers: {
+        fetch('/api/auth/login', {
+            method: "POST",
+            body: JSON.stringify({ email, password }),
+            headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-        })
-            .then(res => console.log(res.json()))
+        }).then(res => res.json())
+            .then(res => console.log(res))
     }
 
     return (
