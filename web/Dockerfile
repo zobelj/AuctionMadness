@@ -1,12 +1,11 @@
-from node:12
+from node:16
 
 workdir /web
 
 copy . /web
 
 run npm ci
-# run npm run start
 
 expose 3000
 
-cmd ["npm"]
+cmd ["npm", "run", "dev"]
