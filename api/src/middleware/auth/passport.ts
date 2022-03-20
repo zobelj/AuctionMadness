@@ -1,5 +1,6 @@
 import { Strategy as LocalStrategy } from 'passport-local'
 import UserModel from 'models/user'
+import { verify } from 'utils/password'
 
 const PassportStrategy = (passport) => {
     passport.use(
@@ -10,7 +11,7 @@ const PassportStrategy = (passport) => {
             UserModel.findOne({ email }, (err, user) => {
                 if (err) throw err;
                 if (!user) return done(null, false);
-                if (password === user.password)
+                if (verify(password, user.password))
                     return done(null, user);
                 else
                     return done(null, false);

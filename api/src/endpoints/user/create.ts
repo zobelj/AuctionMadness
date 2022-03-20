@@ -1,4 +1,5 @@
 import UserModel from 'models/user'
+import { hashsalt } from 'utils/password';
 
 const create = async (req, res) => {
     const { name, email, password } = req.body;
@@ -7,13 +8,19 @@ const create = async (req, res) => {
 
     const user = await UserModel.findOne({ email })
     if (email && password && !user) {
-        const user = new UserModel({
-            name,
-            email,
-            password,
-        })
-        const savedUser = await user.save()
-        return res.status(200).json({ message: "success", user: savedUser })
+        const passwordProperties = hashsalt(password);
+        if (passwordProperties) {
+            const user = new UserModel({
+                name,
+                email,
+                password: passwordProperties,
+            })
+            const savedUser = await user.save()
+            return res.status(200).json({ message: "success", user: savedUser })
+        }
+        else {
+            return res.status(500).json({ message: "error" })
+        }
     }
     else {
         return res.status(409).json({ message: "error" })
