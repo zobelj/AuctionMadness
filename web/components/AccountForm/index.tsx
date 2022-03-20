@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import AuthActions from '../../store/auth'
 
-const AccountForm = ({ signup, signupSuccess, signupFailure }) => {
+const AccountForm = ({ user, signup, signupSuccess, signupFailure }) => {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -22,39 +22,41 @@ const AccountForm = ({ signup, signupSuccess, signupFailure }) => {
     }
 
     useEffect(() => {
-        if (signupSuccess) {
-            router.push('/');
-        }
         setError(signupFailure && invalidEmail === email);
     }, [email, password, invalidEmail, signupSuccess, signupFailure]); // only rerender when these values change
 
 
     return (
         <Wrapper>
-            <h1>Create account</h1>
+            <h1>My Account</h1>
             <TextField
                 id="outlined-name"
                 label="Name"
+                value={user.name}
+                autoComplete='off'
                 onChange={e => setName(e.target.value)}
             />
             <TextField
                 id="outlined-name"
                 label="Email"
+                value={user.email}
+                autoComplete='off'
                 onChange={e => setEmail(e.target.value)}
             />
             <TextField
                 id="outlined-uncontrolled"
                 label="Password"
                 type="password"
+                autoComplete="new-password"
                 onChange={e => setPassword(e.target.value)}
             />
-            { error ? (<Button variant="outlined" color="error">Account Already Exists!</Button>) : (<Button variant="outlined" onClick={submit}>Signup</Button>)}
+            { error ? (<Button variant="outlined" color="error">Email Already In Use</Button>) : (<Button variant="outlined" onClick={submit}>Save</Button>)}
         </Wrapper>
     )
 }
 
 
-const mapStateToProps = (state) => ({ signupSuccess: state.auth.user, signupFailure: state.auth.error })
+const mapStateToProps = (state) => ({ user: state.auth.user, signupSuccess: state.auth.user, signupFailure: state.auth.error })
 const mapDispatchToProps = (dispatch) => bindActionCreators({ signup: AuthActions.signup }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountForm)
