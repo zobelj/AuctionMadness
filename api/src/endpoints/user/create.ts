@@ -6,7 +6,7 @@ const create = async (req, res) => {
     if (!email || !password)
         return res.status(400).json({ message: "error" })
 
-    const user = await UserModel.findOne({ email })
+    const user = await UserModel.findOne({ email }, { password: 0 })
     if (email && password && !user) {
         const passwordProperties = hashsalt(password);
         if (passwordProperties) {
